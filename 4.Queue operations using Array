@@ -1,4 +1,3 @@
-**4.Queue operations using Array:**
 
 *Aim:*
 To implement a queue using an array and perform enqueue (insertion) and dequeue (deletion) operations.
