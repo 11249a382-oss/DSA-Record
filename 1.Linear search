@@ -19,37 +19,37 @@
 int main() {
     int n, key, i, found = 0;  // variable declaration
 
-    // Command: Read the size of the array
+    // Read size of array
     printf("Enter the size of the array: ");
     scanf("%d", &n);
 
-    int A[n];  // Command: Declare array of size n
+    int A[n];  // array declaration
 
-    // Command: Read n elements into the array
+    // Read array elements
     printf("Enter %d Elements: ", n);
     for (i = 0; i < n; i++) {
         scanf("%d", &A[i]);
     }
 
-    // Command: Read the element to search
+    // Read element to search
     printf("Enter the element to Search: ");
     scanf("%d", &key);
 
-    // Command: Perform linear search
+    // Linear search
     for (i = 0; i < n; i++) {
-        if (A[i] == key) {                  // Command: Check if element matches
+        if (A[i] == key) {   // match found
             printf("Element found at position %d\n", i + 1);
-            found = 1;                      // Command: Set found flag
-            break;                          // Command: Exit loop after finding
+            found = 1;
+            break;
         }
     }
 
-    // Command: If element not found
+    // If element not found
     if (!found) {
         printf("Element not found\n");
     }
 
-    return 0;   // Command: End of program
+    return 0;
 }
 
 
