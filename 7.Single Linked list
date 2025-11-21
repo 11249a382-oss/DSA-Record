@@ -20,12 +20,16 @@ Algorithm:
 4.Display by traversing from head printing nodes.
 
 Program:
+
 #include <stdio.h>
 #include <stdlib.h>
+
 struct Node {
     int data;
     struct Node *next;
 };
+
+// Create node
 struct Node *CreateNode(int data) {
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
     if (!newNode) {
@@ -36,6 +40,8 @@ struct Node *CreateNode(int data) {
     newNode->next = NULL;
     return newNode;
 }
+
+// Insert at beginning
 void InsertAtBeginning(struct Node **head, int data) {
     struct Node *newNode = CreateNode(data);
     if (!newNode) return;
@@ -43,6 +49,8 @@ void InsertAtBeginning(struct Node **head, int data) {
     *head = newNode;
     printf("Inserted %d at beginning.\n", data);
 }
+
+// Insert at end
 void InsertAtEnd(struct Node **head, int data) {
     struct Node *newNode = CreateNode(data);
     if (!newNode) return;
@@ -55,6 +63,8 @@ void InsertAtEnd(struct Node **head, int data) {
     }
     printf("Inserted %d at end.\n", data);
 }
+
+// Insert at given position (1-based)
 void InsertAtPosition(struct Node **head, int data, int pos) {
     if (pos < 1) {
         printf("Invalid position!\n");
@@ -76,13 +86,15 @@ void InsertAtPosition(struct Node **head, int data, int pos) {
     prev->next = newNode;
     printf("Inserted %d at position %d.\n", data, pos);
 }
+
+// Delete node by value
 void DeleteNode(struct Node **head, int value) {
     if (*head == NULL) {
         printf("List is empty. Cannot delete.\n");
         return;
     }
     struct Node *temp = *head;
-    if (temp->data == value) {
+    if (temp->data == value) {    // delete first node
         *head = temp->next;
         free(temp);
         printf("Deleted %d from list.\n", value);
@@ -99,6 +111,8 @@ void DeleteNode(struct Node **head, int value) {
     free(temp);
     printf("Deleted %d from list.\n", value);
 }
+
+// Display list
 void DisplayList(struct Node *head) {
     if (head == NULL) {
         printf("List is empty.\n");
@@ -110,32 +124,41 @@ void DisplayList(struct Node *head) {
     }
     printf("NULL\n");
 }
+
 int main() {
     struct Node *head = NULL;
     int choice, data, pos;
+
+    // Menu loop
     while (1) {
         printf("\n--- Singly Linked List Menu ---\n");
         printf("1. Insert at Beginning\n2. Insert at End\n3. Insert at Position\n4. Delete by Value\n5. Display List\n6. Exit\n");
         printf("Enter choice: ");
         if (scanf("%d", &choice) != 1) break;
+
         switch (choice) {
             case 1:
                 printf("Enter data: "); scanf("%d", &data);
-                InsertAtBeginning(&head, data); break;
+                InsertAtBeginning(&head, data);
+                break;
             case 2:
                 printf("Enter data: "); scanf("%d", &data);
-                InsertAtEnd(&head, data); break;
+                InsertAtEnd(&head, data);
+                break;
             case 3:
                 printf("Enter data and position: "); scanf("%d %d", &data, &pos);
-                InsertAtPosition(&head, data, pos); break;
+                InsertAtPosition(&head, data, pos);
+                break;
             case 4:
                 printf("Enter value to delete: "); scanf("%d", &data);
-                DeleteNode(&head, data); break;
+                DeleteNode(&head, data);
+                break;
             case 5:
-                DisplayList(head); break;
+                DisplayList(head);
+                break;
             case 6:
                 printf("Exiting...\n");
-                // free all nodes
+                // Free all nodes
                 while (head) {
                     struct Node *t = head;
                     head = head->next;
@@ -148,6 +171,7 @@ int main() {
     }
     return 0;
 }
+
 
 Sample Output:
 --- Singly Linked List Menu ---
