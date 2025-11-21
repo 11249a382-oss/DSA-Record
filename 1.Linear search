@@ -15,29 +15,43 @@
 *program:-*
 
 #include <stdio.h>
+
 int main() {
-    int n, key, i, found = 0;
+    int n, key, i, found = 0;  // variable declaration
+
+    // Command: Read the size of the array
     printf("Enter the size of the array: ");
     scanf("%d", &n);
-    int A[n];
+
+    int A[n];  // Command: Declare array of size n
+
+    // Command: Read n elements into the array
     printf("Enter %d Elements: ", n);
     for (i = 0; i < n; i++) {
         scanf("%d", &A[i]);
     }
+
+    // Command: Read the element to search
     printf("Enter the element to Search: ");
     scanf("%d", &key);
+
+    // Command: Perform linear search
     for (i = 0; i < n; i++) {
-        if (A[i] == key) {
+        if (A[i] == key) {                  // Command: Check if element matches
             printf("Element found at position %d\n", i + 1);
-            found = 1;
-            break;
+            found = 1;                      // Command: Set found flag
+            break;                          // Command: Exit loop after finding
         }
     }
+
+    // Command: If element not found
     if (!found) {
         printf("Element not found\n");
     }
-    return 0;
+
+    return 0;   // Command: End of program
 }
+
 
 *output:*
 INPUT:
