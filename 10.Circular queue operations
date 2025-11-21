@@ -31,17 +31,26 @@ PROGRAM:
 
 #include <stdio.h>
 #include <stdlib.h>
+
 struct Node {
     int data;
     struct Node *next;
 };
+
 struct Node *front = NULL;
 struct Node *rear = NULL;
+
+// Insert element
 void enqueue(int x) {
-    struct Node newNode = (struct Node)malloc(sizeof(struct Node));
+    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+    if (newNode == NULL) {               // allocation check
+        printf("Memory allocation failed\n");
+        return;
+    }
     newNode->data = x;
     newNode->next = NULL;
-    if (front == NULL) {
+
+    if (front == NULL) {                 // first element
         front = rear = newNode;
         rear->next = front;
     } else {
@@ -51,24 +60,28 @@ void enqueue(int x) {
     }
     printf("%d inserted\n", x);
 }
+
+// Delete element
 void dequeue() {
-    if (front == NULL) {
+    if (front == NULL) {                 // underflow check
         printf("Queue Underflow\n");
         return;
     }
+
     struct Node *temp = front;
 
-    if (front == rear) { 
+    if (front == rear) {                 // single element
         printf("%d deleted\n", front->data);
         front = rear = NULL;
-    } 
-    else {
+    } else {                             // more than one
         printf("%d deleted\n", front->data);
         front = front->next;
         rear->next = front;
     }
     free(temp);
 }
+
+// Display queue
 void display() {
     if (front == NULL) {
         printf("Queue is Empty\n");
@@ -82,16 +95,32 @@ void display() {
     } while (temp != front);
     printf("\n");
 }
+
+// Free all nodes (cleanup)
+void freeQueue() {
+    if (front == NULL) return;
+    // break the circle to make linear list
+    rear->next = NULL;
+    struct Node *temp;
+    while (front != NULL) {
+        temp = front->next;
+        free(front);
+        front = temp;
+    }
+    rear = NULL;
+}
+
 int main() {
     int choice, x;
     while (1) {
         printf("\n1.Enqueue\n2.Dequeue\n3.Display\n4.Exit\n");
         printf("Enter choice: ");
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) break;
+
         switch (choice) {
             case 1:
                 printf("Enter value: ");
-                scanf("%d", &x);
+                if (scanf("%d", &x) != 1) break;
                 enqueue(x);
                 break;
             case 2:
@@ -102,12 +131,17 @@ int main() {
                 break;
             case 4:
                 printf("Exiting...\n");
+                freeQueue();   // cleanup
                 return 0;
             default:
                 printf("Invalid Choice\n");
         }
     }
+
+    freeQueue();
+    return 0;
 }
+
 
 SAMPLE OUTPUT:
 
